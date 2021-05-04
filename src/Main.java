@@ -1,5 +1,3 @@
-import org.junit.Assert;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -153,6 +151,7 @@ class Department {
     private Employee manager;
     private Employee hr;
     private ArrayList<Degree> requires = new ArrayList<Degree>();
+    private static int workExperienceMinimum = 5;
     private ArrayList<Applicant> applicants = new ArrayList<Applicant>();
 
     public Department(String name, Employee manager, Employee hr){
@@ -231,6 +230,10 @@ class Department {
         }
 
         return addToApplicants;
+    }
+
+    public boolean hasRequiredSpecs(Applicant applicant) {
+        return applicant.getExperience() >= workExperienceMinimum && applicant.checkIfApplicantHasDegree(this.requires);
     }
 }
 
@@ -330,6 +333,7 @@ class Applicant {
     private Degree has;
     private Department applies;
     private boolean passed;
+    private boolean appliedBefore;
 
     public Applicant(String firstname, String lastname, int experience, Degree has, Department applies) {
         this.firstname = firstname;
@@ -337,6 +341,7 @@ class Applicant {
         this.experience = experience;
         this.has = has;
         this.applies = applies;
+        this.appliedBefore = true;
     }
 
     public String getFirstname() {
@@ -387,6 +392,14 @@ class Applicant {
         this.passed = passed;
     }
 
+    public boolean isAppliedBefore() {
+        return appliedBefore;
+    }
+
+    public void setAppliedBefore(boolean appliedBefore) {
+        this.appliedBefore = appliedBefore;
+    }
+
     public boolean checkIfApplicantHasDegree(ArrayList<Degree> degrees) {
         boolean has = false;
 
@@ -397,5 +410,25 @@ class Applicant {
         }
 
         return has;
+    }
+
+    public Boolean hasTheInformation() {
+        boolean first = false;
+        boolean second = false;
+        boolean third = false;
+
+        if(!this.getFirstname().isEmpty()) {
+            first = true;
+        }
+
+        if(this.getHas() != null){
+            second = true;
+        }
+
+        if(this.isAppliedBefore()) {
+            third = true;
+        }
+
+        return first && second;
     }
 }

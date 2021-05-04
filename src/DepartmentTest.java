@@ -1,6 +1,4 @@
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DepartmentTest {
@@ -20,7 +18,7 @@ class DepartmentTest {
         // Afdeling ICT
         Department ict = new Department("ICT", ahmed, hr);
 
-        Assert.assertTrue(ict.addToApplicants(new Applicant("Applicant", "One", 2, ictDiploma, ict)));
+        assertTrue(ict.addToApplicants(new Applicant("Applicant", "One", 2, ictDiploma, ict)));
     }
 
     @Test
@@ -41,7 +39,7 @@ class DepartmentTest {
         // Voeg applicant toe
         ict.addToApplicants(new Applicant("Applicant", "One", 2, ictDiploma, ict));
 
-        Assert.assertFalse(ict.addToApplicants(new Applicant("Applicant", "One", 2, ictDiploma, ict)));
+        assertFalse(ict.addToApplicants(new Applicant("Applicant", "One", 2, ictDiploma, ict)));
     }
 
    @Test
@@ -65,7 +63,7 @@ class DepartmentTest {
        // Applicant
        Applicant applicant = new Applicant("Applicant", "One", 2, ictDiploma, ict);
 
-       Assert.assertTrue(applicant.checkIfApplicantHasDegree(ict.getRequires()));
+       assertTrue(applicant.checkIfApplicantHasDegree(ict.getRequires()));
    }
 
     @Test
@@ -89,6 +87,6 @@ class DepartmentTest {
         // Applicant
         Applicant applicant = new Applicant("Applicant", "One", 2, random1, ict);
 
-        Assert.assertFalse(applicant.checkIfApplicantHasDegree(ict.getRequires()));
+        assertFalse(applicant.checkIfApplicantHasDegree(ict.getRequires()));
     }
 }
