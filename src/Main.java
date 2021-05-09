@@ -417,7 +417,7 @@ class Applicant {
         boolean second = false;
         boolean third = false;
 
-        if(!this.getFirstname().isEmpty()) {
+        if(this.getFirstname() != null) {
             first = true;
         }
 

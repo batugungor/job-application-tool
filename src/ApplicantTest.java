@@ -22,11 +22,16 @@ public class ApplicantTest {
         return new Applicant("Batuhan", "Test", 2, null, testData());
     }
 
+    public static Applicant testDataWithoutNameAndDegree()  {
+        return new Applicant(null, "Test", 2, null, testData());
+    }
+
 
     @Test
     void testDegree() {
         assertTrue(testDataWithDegree("HBO ICT", 4).hasTheInformation());
         assertFalse(testDataWithoutDegree().hasTheInformation());
+        assertFalse(testDataWithoutNameAndDegree().hasTheInformation());
     }
 
     @Test
