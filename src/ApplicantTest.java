@@ -55,8 +55,6 @@ public class ApplicantTest {
         mboNiv4.addToRequires(mboNiv4Degree);
         zorg.addToRequires(zorgDegree);
 
-
-
         Applicant testOne = testDataWithExistingDegree(hboIctDegree, 4);
         Applicant testTwo = testDataWithExistingDegree(mboNiv4Degree, 4);
         Applicant testThree = testDataWithExistingDegree(zorgDegree, 4);
