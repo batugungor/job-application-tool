@@ -48,9 +48,13 @@ public class ApplicantTest {
     @Test
     void testDegreeAndExperience() {
         Applicant testOne = testDataWithDegree("HBO ICT", 6);
-        Applicant testTwo = testDataWithDegree("MBO niv 4 ICT", 4);
+        Applicant testTwo = testDataWithDegree("MBO niv 4 zorg", 6);
+        Applicant testThree = testDataWithDegree("HBO ICT", 4);
+        Applicant testFour = testDataWithDegree("MBO niv 4 zorg", 4);
 
         assertTrue(testData().hasRequiredSpecs(testOne));
         assertFalse(testData().hasRequiredSpecs(testTwo));
+        assertFalse(testData().hasRequiredSpecs(testThree));
+        assertFalse(testData().hasRequiredSpecs(testFour));
     }
 }
