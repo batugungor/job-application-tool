@@ -18,6 +18,10 @@ public class ApplicantTest {
        return new Applicant("Batuhan", "Test", experience, new Degree(degree), testData());
     }
 
+    public static Applicant testDataWithExistingDegree(Degree degree, int experience)  {
+        return new Applicant("Batuhan", "Test", experience, degree, testData());
+    }
+
     public static Applicant testDataWithoutDegree()  {
         return new Applicant("Batuhan", "Test", 2, null, testData());
     }
@@ -36,13 +40,34 @@ public class ApplicantTest {
 
     @Test
     void testDegreeTypes() {
-        Applicant testOne = testDataWithDegree("HBO ICT", 4);
-        Applicant testTwo = testDataWithDegree("MBO niv 4 ICT", 4);
-        Applicant testThree = testDataWithDegree("MBO niv 4 zorg", 4);
+        Manager ahmed = new Manager(252, "Ahmed", "Deedad", 300.000, 75.000);
 
-        assertTrue(testOne.checkIfApplicantHasDegree(testData().getRequires()));
-        assertTrue(testTwo.checkIfApplicantHasDegree(testData().getRequires()));
-        assertFalse(testThree.checkIfApplicantHasDegree(testData().getRequires()));
+        Department hboIct = new Department("hbo ict", ahmed, ahmed);
+        Department mboNiv4 = new Department("mboNiv4", ahmed, ahmed);
+        Department zorg = new Department("zorg", ahmed, ahmed);
+
+
+        Degree hboIctDegree = new Degree("HBO ict");
+        Degree mboNiv4Degree = new Degree("MBO niv 4 ICT");
+        Degree zorgDegree = new Degree("MBO niv 4 zorg");
+
+        hboIct.addToRequires(hboIctDegree);
+        mboNiv4.addToRequires(mboNiv4Degree);
+        zorg.addToRequires(zorgDegree);
+
+
+
+        Applicant testOne = testDataWithExistingDegree(hboIctDegree, 4);
+        Applicant testTwo = testDataWithExistingDegree(mboNiv4Degree, 4);
+        Applicant testThree = testDataWithExistingDegree(zorgDegree, 4);
+
+        assertTrue(testOne.checkIfApplicantHasDegree(hboIct.getRequires()));
+        assertTrue(testTwo.checkIfApplicantHasDegree(mboNiv4.getRequires()));
+        assertTrue(testThree.checkIfApplicantHasDegree(zorg.getRequires()));
+
+        assertFalse(testTwo.checkIfApplicantHasDegree(hboIct.getRequires()));
+        assertFalse(testOne.checkIfApplicantHasDegree(mboNiv4.getRequires()));
+        assertFalse(testOne.checkIfApplicantHasDegree(zorg.getRequires()));
     }
 
     @Test
