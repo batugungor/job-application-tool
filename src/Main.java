@@ -233,7 +233,10 @@ class Department {
     }
 
     public boolean hasRequiredSpecs(Applicant applicant) {
-        return applicant.getExperience() >= workExperienceMinimum && applicant.checkIfApplicantHasDegree(this.requires);
+        return applicant.getExperience() >= workExperienceMinimum &&
+                applicant.checkIfApplicantHasDegree(this.requires) &&
+                applicant.isHasApplied() &&
+                applicant.getRequestedSalary() <= 4500;
     }
 }
 
@@ -334,6 +337,8 @@ class Applicant {
     private Department applies;
     private boolean passed;
     private boolean appliedBefore;
+    private boolean hasApplied;
+    private double requestedSalary;
 
     public Applicant(String firstname, String lastname, int experience, Degree has, Department applies) {
         this.firstname = firstname;
@@ -399,6 +404,35 @@ class Applicant {
     public void setAppliedBefore(boolean appliedBefore) {
         this.appliedBefore = appliedBefore;
     }
+
+    public boolean isHasApplied() {
+        return hasApplied;
+    }
+
+    public void setHasApplied(boolean hasApplied) {
+        this.hasApplied = hasApplied;
+    }
+
+    public double getRequestedSalary() {
+        return requestedSalary;
+    }
+
+    public void setRequestedSalary(double requestedSalary) {
+        this.requestedSalary = requestedSalary;
+    }
+
+    public String getJobLevel() {
+        if (0 <= this.getExperience() && this.getExperience() < 3) {
+            return "Junior";
+        } else if (3 <= this.getExperience() && this.getExperience() < 6) {
+            return "Medior";
+        } else if (this.getExperience() >= 6) {
+            return "Senior";
+        }
+        return "Unknown, error.";
+    }
+
+
 
     public boolean checkIfApplicantHasDegree(ArrayList<Degree> degrees) {
         boolean has = false;
