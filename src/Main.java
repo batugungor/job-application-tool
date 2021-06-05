@@ -489,23 +489,11 @@ class Applicant {
 class Company {
     private static Company firstInstance = null;
     private String name = "Aegon B.V.";
-    static boolean firstThread = true;
 
     private Company() { }
 
     public static Company getInstance() {
         if(firstInstance == null) {
-            if(firstThread){
-                firstThread = false;
-                try {
-                    Thread.currentThread();
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-
-                    e.printStackTrace();
-                }
-            }
-
             synchronized(Company.class){
                 if(firstInstance == null) {
                     firstInstance = new Company();
