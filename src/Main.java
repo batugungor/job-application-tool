@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println(Company.getInstance().getCompanyName() + "Sollicitatie systeem");
         // Human Resources
         HumanResources hr = new HumanResources(120,"Human", "Resources", 250.000);
 
@@ -144,6 +145,9 @@ abstract class Employee {
     public void setWorks(Department works) {
         this.works = works;
     }
+
+    public abstract String getFullNameWithExtras ();
+
 }
 
 class Department {
@@ -254,6 +258,11 @@ class RegularEmployee extends Employee {
     public int getCode() {
         return 997 + super.getCode();
     }
+
+    @Override
+    public String getFullNameWithExtras() {
+        return this.getFirstname() + " " + this.getLastname() + "met code" + this.getCode();
+    }
 }
 
 class Manager extends Employee {
@@ -267,6 +276,11 @@ class Manager extends Employee {
     @Override
     public int getCode() {
         return 998 + super.getCode();
+    }
+
+    @Override
+    public String getFullNameWithExtras() {
+        return this.getFirstname() + " " + this.getLastname() + "met code" + this.getCode() + "met bonus" + this.getBonus();
     }
 
     public Double getBonus() {
@@ -288,6 +302,11 @@ class HumanResources extends Employee {
     @Override
     public int getCode() {
         return 999 + super.getCode();
+    }
+
+    @Override
+    public String getFullNameWithExtras() {
+        return "human resources medewerker" + this.getFirstname() + " " + this.getLastname() + "met code" + this.getCode();
     }
 
     public ArrayList<Employee> getRecruited() {
@@ -464,5 +483,40 @@ class Applicant {
         }
 
         return first && second;
+    }
+}
+
+class Company {
+    private static Company firstInstance = null;
+    private String name = "Aegon B.V.";
+    static boolean firstThread = true;
+
+    private Company() { }
+
+    public static Company getInstance() {
+        if(firstInstance == null) {
+            if(firstThread){
+                firstThread = false;
+                try {
+                    Thread.currentThread();
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+
+                    e.printStackTrace();
+                }
+            }
+
+            synchronized(Company.class){
+                if(firstInstance == null) {
+                    firstInstance = new Company();
+
+                }
+            }
+        }
+        return firstInstance;
+    }
+
+    public String getCompanyName() {
+        return firstInstance.name;
     }
 }
