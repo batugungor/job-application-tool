@@ -1,3 +1,7 @@
+import com.aego.Applicant;
+import com.aego.Degree;
+import com.aego.Department;
+import com.aego.Manager;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
