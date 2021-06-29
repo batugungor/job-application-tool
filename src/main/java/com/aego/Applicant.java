@@ -2,9 +2,7 @@ package com.aego;
 
 import java.util.ArrayList;
 
-public class Applicant {
-    private String firstname;
-    private String lastname;
+public class Applicant extends Person{
     private int experience;
     private Degree has;
     private Department applies;
@@ -14,28 +12,12 @@ public class Applicant {
     private double requestedSalary;
 
     public Applicant(String firstname, String lastname, int experience, Degree has, Department applies) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.setFirstname(firstname);
+        this.setLastname(lastname);
         this.experience = experience;
         this.has = has;
         this.applies = applies;
         this.appliedBefore = true;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
     }
 
     public int getExperience() {
