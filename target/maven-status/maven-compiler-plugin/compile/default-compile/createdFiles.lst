@@ -3,6 +3,7 @@ com\aego\Main.class
 com\aego\Degree.class
 com\aego\Employee.class
 com\aego\Applicant.class
+com\aego\Person.class
 com\aego\Department.class
 com\aego\Manager.class
 com\aego\Company.class
